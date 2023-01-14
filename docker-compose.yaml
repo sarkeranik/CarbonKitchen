@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  recipemanagement-db:
+    image: mcr.microsoft.com/mssql/server
+    restart: always
+    ports:
+      - '54768:1433'
+    environment:
+      - DB_USER=SA
+      - SA_PASSWORD=#localDockerPassword#
+      - DB_CONTAINER_NAME=dev_recipemanagement
+      - ACCEPT_EULA=Y
+    volumes:
+      - recipemanagement-data:/var/lib/sqlserver/data
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+#    port mappings: https://www.jaegertracing.io/docs/1.32/getting-started/
+    ports:
+      - "54776:5775/udp"
+      - "54775:6831/udp"
+      - "54777:6832/udp"
+      - "54778:5778"
+      - "54779:16686"
+      - "54780:14250"
+      - "54781:14268"
+      - "54782:14269"
+      - "54783:9411"
+
+        
+volumes:
+  # compose volumes marker - do not delete
+  recipemanagement-data:
