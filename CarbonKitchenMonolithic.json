@@ -1,0 +1,184 @@
+{
+  "DomainName": "CarbonKitchen",
+  "BoundedContexts": [
+    {
+      "ProjectName": "RecipeManagement",
+      "Port": 5005,
+      "DbContext": {
+        "ContextName": "RecipesDbContext",
+        "DatabaseName": "RecipeManagement",
+        "Provider": "SqlServer"
+      },
+      "Entities": [
+        {
+          "Name": "User",
+          "Plural": "Users",
+          "Properties": [
+            {
+              "Name": "Name",
+              "Type": "string"
+            },
+            {
+              "Name": "UserProfileId",
+              "Type": "Guid?",
+              "ForeignEntityName": "UserProfile",
+              "ForeignEntityPlural": "UserProfiles"
+            }
+          ]
+        },
+        {
+          "Name": "UserProfile",
+          "Plural": "UserProfiles",
+          "Properties": [
+            {
+              "Name": "Name",
+              "Type": "string"
+            },
+            {
+              "Name": "UserId",
+              "Type": "Guid",
+              "ForeignEntityName": "User",
+              "ForeignEntityPlural": "Users"
+            }
+          ]
+        },
+        {
+          "Name": "Post",
+          "Plural": "Posts",
+          "Properties": [
+            {
+              "Name": "Name",
+              "Type": "string"
+            },
+            {
+              "Name": "BlogId",
+              "Type": "Guid?",
+              "ForeignEntityName": "Blog",
+              "ForeignEntityPlural": "Blogs"
+            }
+          ]
+        },
+        {
+          "Name": "Blog",
+          "Plural": "Blogs",
+          "Properties": [
+            {
+              "Name": "Name",
+              "Type": "string"
+            },
+            {
+              "Name": "Posts",
+              "Type": "ICollection<Post>",
+              "ForeignEntityPlural": "Posts"
+            }
+          ]
+        },
+        {
+          "Name": "Book",
+          "Plural": "Books",
+          "Properties": [
+            {
+              "Name": "Name",
+              "Type": "string"
+            },
+            {
+              "Name": "Categories",
+              "Type": "ICollection<Category>",
+              "ForeignEntityPlural": "Categories"
+            }
+          ]
+        },
+        {
+          "Name": "Category",
+          "Plural": "Categories",
+          "Properties": [
+            {
+              "Name": "Name",
+              "Type": "string"
+            },
+            {
+              "Name": "Books",
+              "Type": "ICollection<Book>",
+              "ForeignEntityPlural": "Books"
+            }
+          ]
+        },
+        {
+          "Name": "Recipe",
+          "Plural": "Recipes",
+          "Features": [
+            {
+              "Type": "GetList"
+            },
+            {
+              "Type": "GetRecord"
+            },
+            {
+              "Type": "AddRecord"
+            },
+            {
+              "Type": "UpdateRecord"
+            },
+            {
+              "Type": "DeleteRecord"
+            }
+          ],
+          "Properties": [
+            {
+              "Name": "RecipeId",
+              "IsPrimaryKey": true,
+              "Type": "int",
+              "CanFilter": true,
+              "CanSort": true
+            },
+            {
+              "Name": "Title",
+              "Type": "string",
+              "CanFilter": true,
+              "CanSort": true
+            },
+            {
+              "Name": "Directions",
+              "Type": "string",
+              "CanFilter": true,
+              "CanSort": true
+            },
+            {
+              "Name": "RecipeSourceLink",
+              "Type": "string",
+              "CanFilter": true,
+              "CanSort": true
+            },
+            {
+              "Name": "Description",
+              "Type": "string",
+              "CanFilter": true,
+              "CanSort": true
+            },
+            {
+              "Name": "ImageLink",
+              "Type": "string",
+              "CanFilter": true,
+              "CanSort": true
+            },
+            {
+              "Name": "Visibility",
+              "SmartNames": ["Public", "Friends Only", "Private"],
+              "CanFilter": true,
+              "CanSort": true
+            }
+          ]
+        }
+      ],
+      "SwaggerConfig": {
+        "Title": "Carbon Kitchen Recipes",
+        "Description": "Our API uses a REST based design, leverages the JSON data format, and relies upon HTTPS for transport. We respond with meaningful HTTP response codes and if an error occurs, we include error details in the response body. API Documentation is at carbonkitchen.com/dev/docs",
+        "ApiContact": {
+          "Name": "Carbon Kitchen",
+          "Email": "devsupport@CarbonKitchen.com",
+          "Url": "https://www.carbonkitchen.com"
+        }
+      }
+    }
+  ]
+}
